@@ -43,7 +43,7 @@ mutation Login(  \$input:String!, \$password:String!){
 
 final String twofactorLogin = """
 mutation TwoFALogin(  \$email:String!, \$totpCode:String!){
-  twoFALogin(data:{email:\$input,totpCode:\$password })
+  twoFALogin(data:{email:\$email,totpCode:\$totpCode })
   {
     user{
       _id,email,username,phonenumber

@@ -74,6 +74,7 @@ class _VerifyAccountScreenState extends State<VerifyAccountScreen> {
     queryData = MediaQuery.of(context);
     return Scaffold(
       body: Container(
+        height: queryData.size.height,
         padding: EdgeInsets.only(
             left: 10, right: 10, top: queryData.size.height * 0.06),
         width: double.infinity,
@@ -120,201 +121,212 @@ class _VerifyAccountScreenState extends State<VerifyAccountScreen> {
                   backgroundColor: Colors.white,
                   textColor: Colors.black,
                   fontSize: 16.0);
+              setState(() {
+                isVerifying = false;
+              });
             } else {
               setState(() {
                 isVerifying = false;
               });
             }
           },
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              InkResponse(
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                child: Container(
-                    margin: EdgeInsets.only(left: 20),
-                    padding:
-                        EdgeInsets.only(left: 15, top: 6, bottom: 6, right: 10),
-                    decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(40)),
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                      size: 20,
-                    )),
-              ),
-              SizedBox(
-                height: queryData.size.height * 0.03,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Text(
-                  'Verify your account',
-                  style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                InkResponse(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Container(
+                      margin: EdgeInsets.only(left: 20),
+                      padding:
+                          EdgeInsets.only(left: 15, top: 6, bottom: 6, right: 10),
+                      decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(40)),
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.white,
+                        size: 20,
+                      )),
                 ),
-              ),
-              SizedBox(
-                height: queryData.size.height * 0.02,
-              ),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
+                SizedBox(
+                  height: queryData.size.height * 0.03,
                 ),
-                color: Colors.white,
-                child: Container(
-                  padding: EdgeInsets.only(left: 30, right: 30, top: 50),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: queryData.size.height * 0.03,
-                        ),
-                        Image.asset('assets/light_done_icon.png', height: 64),
-                        SizedBox(
-                          height: queryData.size.height * 0.05,
-                        ),
-                        Text(
-                          'We just sent a verfication code to your email.',
-                          style: TextStyle(fontSize: 13, color: Colors.black),
-                        ),
-                        Text(
-                          'Please enter the code',
-                          style: TextStyle(fontSize: 13, color: Colors.black),
-                        ),
-                        SizedBox(
-                          height: queryData.size.height * 0.04,
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          child: TextField(
-                            controller: _codeController,
-                            style: TextStyle(fontSize: 12, color: Colors.black),
-                            cursorColor: AppColors.primaryColor,
-                            decoration: InputDecoration(
-                              labelText: "Verification code",
-                              labelStyle:
-                                  TextStyle(fontSize: 12, color: Colors.black),
-                              hintStyle:
-                                  TextStyle(fontSize: 12, color: Colors.black),
-                              enabledBorder: const UnderlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: Colors.black),
-                              ),
-                              focusedBorder: const UnderlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: Colors.black),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Text(
+                    'Verify your account',
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                ),
+                SizedBox(
+                  height: queryData.size.height * 0.02,
+                ),
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  color: Colors.white,
+                  child: Container(
+                    padding: EdgeInsets.only(left: 30, right: 30, top: 50),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: queryData.size.height * 0.03,
+                          ),
+                          Image.asset('assets/light_done_icon.png', height: 64),
+                          SizedBox(
+                            height: queryData.size.height * 0.05,
+                          ),
+                          Text(
+                            'We just sent a verfication code to your email.',
+                            style: TextStyle(fontSize: 13, color: Colors.black),
+                          ),
+                          Text(
+                            'Please enter the code',
+                            style: TextStyle(fontSize: 13, color: Colors.black),
+                          ),
+                          SizedBox(
+                            height: queryData.size.height * 0.04,
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            child: TextField(
+                              controller: _codeController,
+                              style: TextStyle(fontSize: 12, color: Colors.black),
+                              cursorColor: AppColors.primaryColor,
+                              decoration: InputDecoration(
+                                labelText: "Verification code",
+                                labelStyle:
+                                    TextStyle(fontSize: 12, color: Colors.black),
+                                hintStyle:
+                                    TextStyle(fontSize: 12, color: Colors.black),
+                                enabledBorder: const UnderlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
+                                ),
+                                focusedBorder: const UnderlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: queryData.size.height * 0.04,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: MaterialButton(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5.0)),
-                                onPressed: () async {
-                                  verifyAccountBloc!.add(VerifyEvent(
-                                      code: _codeController.text,
-                                      email: widget.resultData['email']));
-                                },
-                                textColor: Colors.white,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 15.0),
-                                child: Container(
-                                  height: 50,
-                                  decoration: new BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5.0),
-                                      gradient: new LinearGradient(
-                                        colors: [
-                                          AppColors.primaryColor,
-                                          AppColors.primaryColor2
-                                        ],
-                                      )),
-                                  child: Center(
-                                    child: Text(
-                                      "VERIFY ME",
-                                      style: TextStyle(fontSize: 10),
+                          SizedBox(
+                            height: queryData.size.height * 0.04,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: MaterialButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5.0)),
+                                  onPressed: () async {
+                                    verifyAccountBloc!.add(VerifyEvent(
+                                        code: _codeController.text,
+                                        email: widget.resultData['email']));
+                                  },
+                                  textColor: Colors.white,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15.0),
+                                  child: Container(
+                                    height: 50,
+                                    decoration: new BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5.0),
+                                        gradient: new LinearGradient(
+                                          colors: [
+                                            AppColors.primaryColor,
+                                            AppColors.primaryColor2
+                                          ],
+                                        )),
+                                    child: Center(
+                                      child: isVerifying==true?  SizedBox(
+                                        height: 25,
+                                        width: 25,
+                                        child: CircularProgressIndicator(
+                                            valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                                Colors.white))): Text(
+                                        "VERIFY ME",
+                                        style: TextStyle(fontSize: 10),
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: queryData.size.height * 0.05,
-                        ),
-                        Text(
-                          'The code will expire in ${_start} mins',
-                          style: AppStyles.onboardinTextStyle
-                              .copyWith(fontSize: 10, color: Colors.black87),
-                        ),
-                        SizedBox(
-                          height: queryData.size.height * 0.04,
-                        ),
-                        Visibility(
-                          visible: canResendCode!,
-                          child: isSending!
-                              ? Text('sending code..')
-                              : GestureDetector(
-                                  onTap: () async {
-                                    var userEmail = widget.resultData['login']
-                                            ['user']['email']
-                                        .toString();
-                                    print('the email ' + userEmail);
-                                    setState(() {
-                                      isSending = true;
-                                    });
-                                    var queryOptions = QueryOptions(
-                                      document: gql(ResendVerificationCode),
-                                      variables: {"email": userEmail},
-                                      pollInterval: Duration(seconds: 10),
-                                    );
-                                    await client.value
-                                        .query(queryOptions)
-                                        .then((value) {
-                                      print(value.exception.toString());
+                            ],
+                          ),
+                          SizedBox(
+                            height: queryData.size.height * 0.05,
+                          ),
+                          Text(
+                            'The code will expire in ${_start} mins',
+                            style: AppStyles.onboardinTextStyle
+                                .copyWith(fontSize: 10, color: Colors.black87),
+                          ),
+                          SizedBox(
+                            height: queryData.size.height * 0.04,
+                          ),
+                          Visibility(
+                            visible: canResendCode!,
+                            child: isSending!
+                                ? Text('sending code..')
+                                : GestureDetector(
+                                    onTap: () async {
+                                      var userEmail = widget.resultData['login']
+                                              ['user']['email']
+                                          .toString();
+                                      print('the email ' + userEmail);
                                       setState(() {
-                                        isSending = false;
+                                        isSending = true;
                                       });
-                                      if (!value.hasException) {
-                                        startTimer();
-                                      } else {
-                                        print(
-                                            'could not resend code at this time');
-                                      }
-                                    });
-                                  },
-                                  child: Text(
-                                    'Resend Code',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
+                                      var queryOptions = QueryOptions(
+                                        document: gql(ResendVerificationCode),
+                                        variables: {"email": userEmail},
+                                        pollInterval: Duration(seconds: 10),
+                                      );
+                                      await client.value
+                                          .query(queryOptions)
+                                          .then((value) {
+                                        print(value.exception.toString());
+                                        setState(() {
+                                          isSending = false;
+                                        });
+                                        if (!value.hasException) {
+                                          startTimer();
+                                        } else {
+                                          print(
+                                              'could not resend code at this time');
+                                        }
+                                      });
+                                    },
+                                    child: Text(
+                                      'Resend Code',
+                                      style: TextStyle(
+                                          decoration: TextDecoration.underline,
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),
                                   ),
-                                ),
-                        ),
-                        SizedBox(
-                          height: queryData.size.height * 0.09,
-                        ),
-                      ],
+                          ),
+                          SizedBox(
+                            height: queryData.size.height * 0.09,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ), //place where the image appears

@@ -51,12 +51,13 @@ class _LoginScreenState extends State<LoginScreen> {
             builder: (RunMutation? runMutation, QueryResult? result) {
               //  print(result!.exception.toString());
               var errors;
-              if (result!.exception != null) {
+              if (result!.exception != null && result!.exception!.graphqlErrors!=null ) {
                 errors = result.exception!.graphqlErrors[0]
                     .extensions!['exception']['response'];
               }
 
               return Container(
+                height: queryData.size.height ,
                 padding: EdgeInsets.only(
                     left: 40, right: 40, top: queryData.size.height / 5),
                 width: double.infinity,
@@ -66,152 +67,154 @@ class _LoginScreenState extends State<LoginScreen> {
                     fit: BoxFit.cover,
                   ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Welcome!',
-                      style: AppStyles.onboardinTextStyle
-                          .copyWith(fontSize: 40, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: TextField(
-                        controller: _emailController,
-                        style: AppStyles.onboardinTextStyle,
-                        cursorColor: Colors.white,
-                        decoration: InputDecoration(
-                          labelText: "Email Address",
-                          errorText: errors != null && errors['input'] != null
-                              ? errors['input'][0]
-                              : null,
-                          labelStyle: AppStyles.onboardinTextStyle2
-                              .copyWith(fontSize: 12),
-                          hintStyle: AppStyles.onboardinTextStyle2
-                              .copyWith(fontSize: 12),
-                          enabledBorder: const UnderlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.white),
-                          ),
-                          focusedBorder: const UnderlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.white),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Welcome!',
+                        style: AppStyles.onboardinTextStyle
+                            .copyWith(fontSize: 40, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        child: TextField(
+                          controller: _emailController,
+                          style: AppStyles.onboardinTextStyle,
+                          cursorColor: Colors.white,
+                          decoration: InputDecoration(
+                            labelText: "Email Address",
+                            errorText: errors != null && errors['input'] != null
+                                ? errors['input'][0]
+                                : null,
+                            labelStyle: AppStyles.onboardinTextStyle2
+                                .copyWith(fontSize: 12),
+                            hintStyle: AppStyles.onboardinTextStyle2
+                                .copyWith(fontSize: 12),
+                            enabledBorder: const UnderlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.white),
+                            ),
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.white),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: TextField(
-                        controller: _passwordController,
-                        style: AppStyles.onboardinTextStyle,
-                        cursorColor: Colors.white,
-                        decoration: InputDecoration(
-                          errorText:
-                              errors != null && errors['password'] != null
-                                  ? errors['password'][0]
-                                  : null,
-                          labelText: "Password (Min. 8 characters)",
-                          labelStyle: AppStyles.onboardinTextStyle2
-                              .copyWith(fontSize: 12),
-                          hintStyle: AppStyles.onboardinTextStyle2
-                              .copyWith(fontSize: 12),
-                          enabledBorder: const UnderlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.white),
-                          ),
-                          focusedBorder: const UnderlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.white),
-                          ),
-                        ),
-                        obscureText: true,
+                      SizedBox(
+                        height: 20,
                       ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          'Forgot Password?',
-                          style: AppStyles.onboardinTextStyle
-                              .copyWith(fontSize: 12),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          errors != null && errors['message'] != null
-                              ? errors['message']
-                              : '',
-                          style: TextStyle(fontSize: 12, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: MaterialButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0)),
-                            height: 50,
-                            elevation: 0,
-                            color: AppColors.accentColor,
-                            child: result.isLoading
-                                ? SizedBox(
-                                    height: 25,
-                                    width: 25,
-                                    child: CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                                AppColors.brownColor)))
-                                : new Text('LOG IN',
-                                    style: new TextStyle(
-                                        fontSize: 12.0,
-                                        color: AppColors.brownColor)),
-                            onPressed: () async {
-                              runMutation!({
-                                'input': _emailController.text,
-                                'password': _passwordController.text
-                              });
-                            },
+                      Container(
+                        alignment: Alignment.center,
+                        child: TextField(
+                          controller: _passwordController,
+                          style: AppStyles.onboardinTextStyle,
+                          cursorColor: Colors.white,
+                          decoration: InputDecoration(
+                            errorText:
+                                errors != null && errors['password'] != null
+                                    ? errors['password'][0]
+                                    : null,
+                            labelText: "Password (Min. 8 characters)",
+                            labelStyle: AppStyles.onboardinTextStyle2
+                                .copyWith(fontSize: 12),
+                            hintStyle: AppStyles.onboardinTextStyle2
+                                .copyWith(fontSize: 12),
+                            enabledBorder: const UnderlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.white),
+                            ),
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.white),
+                            ),
                           ),
+                          obscureText: true,
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                          onTap: () async {
-                            await Navigator.of(context).push(MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    RegisterScreen()));
-                          },
-                          child: Text(
-                            'New User? Create a new account',
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            'Forgot Password?',
                             style: AppStyles.onboardinTextStyle
                                 .copyWith(fontSize: 12),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            errors != null && errors['message'] != null
+                                ? errors['message']
+                                : '',
+                            style: TextStyle(fontSize: 12, color: Colors.red),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: MaterialButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              height: 50,
+                              elevation: 0,
+                              color: AppColors.accentColor,
+                              child: result.isLoading
+                                  ? SizedBox(
+                                      height: 25,
+                                      width: 25,
+                                      child: CircularProgressIndicator(
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                                  AppColors.brownColor)))
+                                  : new Text('LOG IN',
+                                      style: new TextStyle(
+                                          fontSize: 12.0,
+                                          color: AppColors.brownColor)),
+                              onPressed: () async {
+                                runMutation!({
+                                  'input': _emailController.text,
+                                  'password': _passwordController.text
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: () async {
+                              await Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      RegisterScreen()));
+                            },
+                            child: Text(
+                              'New User? Create a new account',
+                              style: AppStyles.onboardinTextStyle
+                                  .copyWith(fontSize: 12),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               );
             }));
