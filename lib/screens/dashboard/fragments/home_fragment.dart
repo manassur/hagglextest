@@ -23,7 +23,7 @@ class _HomeFragmentState extends State<HomeFragment> {
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(queryData.size.height * 0.2),
+        preferredSize: queryData.size.height>800? Size.fromHeight(queryData.size.height * 0.2):Size.fromHeight(queryData.size.height * 0.3),
         child: AppBar(
           leading: Container(),
           flexibleSpace: Stack(

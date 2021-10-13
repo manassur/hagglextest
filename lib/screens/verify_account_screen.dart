@@ -219,6 +219,18 @@ class _VerifyAccountScreenState extends State<VerifyAccountScreen> {
                               ),
                             ),
                           ),
+                          SizedBox(height:20),
+                          InkWell(
+                            onTap: (){
+                              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                  builder: (BuildContext context) => Dashboard()));
+                            },
+                            child: Text(
+                              'skip to dashboard',
+                              style: AppStyles.onboardinTextStyle
+                                  .copyWith(fontSize: 10, color: Colors.black87),
+                            ),
+                          ),
                           SizedBox(
                             height: queryData.size.height * 0.04,
                           ),
@@ -231,7 +243,8 @@ class _VerifyAccountScreenState extends State<VerifyAccountScreen> {
                                   onPressed: () async {
                                     verifyAccountBloc!.add(VerifyEvent(
                                         code: _codeController.text,
-                                        email: widget.resultData['email']));
+                                        email: widget.resultData['login']
+                                        ['user']['email']));
                                   },
                                   textColor: Colors.white,
                                   padding: const EdgeInsets.symmetric(

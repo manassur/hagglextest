@@ -42,7 +42,7 @@ mutation Login(  \$input:String!, \$password:String!){
 """;
 
 final String twofactorLogin = """
-mutation TwoFALogin(  \$email:String!, \$totpCode:String!){
+mutation TwoFALogin( \$email:String!, \$totpCode:String!){
   twoFALogin(data:{email:\$email,totpCode:\$totpCode })
   {
     user{
@@ -73,10 +73,4 @@ mutation Register ( \$email:String!,\$username:String!,\$password:String!,\$phon
 }
 """;
 
-final String updateTaskMutation = """
-mutation UpdateTodo(\$id: ID!, \$completed: Boolean!) {
-  updateTodo(id: \$id, completed: \$completed) {
-    id
-  }
-}
-""";
+

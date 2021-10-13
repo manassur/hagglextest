@@ -18,46 +18,43 @@ class _DoMoreWidgetState extends State<DoMoreWidget> {
   Widget build(BuildContext context) {
     return Container(
         color: Colors.white,
-        padding: EdgeInsets.symmetric(horizontal: 15.0),
-        child: Expanded(
-          child: ListView(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            children: [
-              InkWell(
-                child: ListItems(
-                  title: "Send Money instantly",
-                  description: "Send crypto from another wallet",
-                  icon: "assets/006-send.png",
-                ),
-                onTap: () {},
+        child: ListView(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          children: [
+            InkWell(
+              child: ListItems(
+                title: "Send Money instantly",
+                description: "Send crypto from another wallet",
+                icon: "assets/006-send.png",
               ),
-              InkWell(
-                child: ListItems(
-                  title: "Receive money from anyone",
-                  description: "Receive crypto from another wallet",
-                  icon: "assets/send_down.png",
-                ),
-                onTap: () {},
+              onTap: () {},
+            ),
+            InkWell(
+              child: ListItems(
+                title: "Receive money from anyone",
+                description: "Receive crypto from another wallet",
+                icon: "assets/send_down.png",
               ),
-              InkWell(
-                child: ListItems(
-                  title: "Virtual Card",
-                  description: "Make faster payments using HaggleX cards",
-                  icon: "assets/008-card.png",
-                ),
-                onTap: () {},
+              onTap: () {},
+            ),
+            InkWell(
+              child: ListItems(
+                title: "Virtual Card",
+                description: "Make faster payments using HaggleX cards",
+                icon: "assets/008-card.png",
               ),
-              InkWell(
-                child: ListItems(
-                  title: "Global Remittance",
-                  description: "Send money to anyone, anywhere",
-                  icon: "assets/009-globe.png",
-                ),
-                onTap: () {},
+              onTap: () {},
+            ),
+            InkWell(
+              child: ListItems(
+                title: "Global Remittance",
+                description: "Send money to anyone, anywhere",
+                icon: "assets/009-globe.png",
               ),
-            ],
-          ),
+              onTap: () {},
+            ),
+          ],
         ));
   }
 }

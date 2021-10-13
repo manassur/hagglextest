@@ -13,15 +13,20 @@ class SplashScreen extends StatefulWidget {
 class Splash extends State<SplashScreen> {
   @override
   void initState() {
+    startTime();
     super.initState();
   }
-
-  @override
+  startTime() async {
+    var duration = new Duration(seconds: 1);
+    return new Timer(duration, route);
+  }
+  route() {
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (BuildContext context) => LoginScreen()));
+  }
+    @override
   Widget build(BuildContext context) {
-    Timer(
-        Duration(seconds: 3),
-        () => Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (BuildContext context) => LoginScreen())));
+
 
     var assetsImage = new AssetImage(
       'assets/logo_white.png',

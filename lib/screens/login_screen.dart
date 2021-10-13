@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
             builder: (RunMutation? runMutation, QueryResult? result) {
               //  print(result!.exception.toString());
               var errors;
-              if (result!.exception != null && result!.exception!.graphqlErrors!=null ) {
+              if (result!.exception != null && result.exception.graphqlErrors!=null ) {
                 errors = result.exception!.graphqlErrors[0]
                     .extensions!['exception']['response'];
               }
